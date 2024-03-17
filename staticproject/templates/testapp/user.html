@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <title>static</title>
+  <style>
+    #h11 {
+      color: red;
+    }
+    #h12 {
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <h1 id="h11">{{ insert_msg }}</h1>
+  <h1 id="h12">Current Date and Time: {{ insert_date }}</h1>
+  <h1>Below is My Image</h1>
+  <img src="{% static 'images/image.png' %}" alt="Saiprabhu image">
+</body>
+</html>
