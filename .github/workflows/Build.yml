@@ -1,49 +1,20 @@
-name: Django CI/CD
-
+name: Build
 on:
   push:
     branches:
-      - main
-      - dev
+      - master
   pull_request:
-    types: [opened, synchronize, reopened, closed]
-
+    types: [opened, synchronize, reopened]
 jobs:
-  django_service:
-    name: Django Service CI/CD
+  sonarcloud:
+    name: SonarCloud
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: CrudBookProject/
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
-          fetch-depth: 0
-
-      - name: Setup Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: 3.8
-
-      - name: Install dependencies
-        run: |
-          pip install tox
-          pip install coverage
-
-      - name: Run tox for tests and coverage
-        run: |
-          tox -e py
-          
-      - name: Override Coverage Source Path for Sonar
-        run: sed -i 's/\/home\/runner\/work\/CrudBookProject\/CrudBookProject\//\/github\/workspace\//g' coverage-reports/coverage.xml
-
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
-        with:
-          projectBaseDir: .
-          args: >
-            -Dsonar.python.coverage.reportPaths=coverage-reports/coverage.xml
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
