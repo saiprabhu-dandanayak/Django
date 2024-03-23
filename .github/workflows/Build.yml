@@ -20,6 +20,10 @@ jobs:
         with:
           fetch-depth: 0  
 
+      - name: Testing the application
+        run : python3 manage.py test testapp
+ 
+
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
         env:
