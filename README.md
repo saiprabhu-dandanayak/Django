@@ -28,11 +28,17 @@ cd myproject
 python3 manage.py startapp appname
 ```
 
-### 1. Run Django project
+### 3. Run Django project
 To  Run Django project, run the following command:
 
 ```bash
 python3 manage.py runserver
+```
+### 4. To Run Testcases 
+To  Run Testcases, run the following command:
+
+```bash
+python manage.py test testapp
 ```
 
 ## Contributing
