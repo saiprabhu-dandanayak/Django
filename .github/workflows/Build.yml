@@ -3,7 +3,7 @@ name: Build
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     types: [opened, synchronize, reopened]
 
@@ -20,9 +20,19 @@ jobs:
         with:
           fetch-depth: 0  
 
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Install Django and dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install Django
+
       - name: Testing the application
-        run : python3 manage.py test testapp
- 
+        run: |
+          python manage.py test testapp
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
