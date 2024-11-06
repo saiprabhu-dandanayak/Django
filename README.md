@@ -41,8 +41,5 @@ To  Run Testcases, run the following command:
 python manage.py test testapp
 ```
 
-## Contributing
-
-Feel free to use this updated README.md file for your Django repository! Let me know if you need further assistance!
 
 
